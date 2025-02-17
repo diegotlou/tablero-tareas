@@ -1,0 +1,46 @@
+.tablero {
+    background-color: rgb(241, 241, 241);
+}
+
+.tablero-navbar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar-elemento {
+    float: left;
+    color: rgb(241, 241, 241);
+}
+
+.boton-tablero {
+    color: rgb(241, 241, 241);
+    display: block;
+    background-color: #333;
+    border: none;
+    text-align: center;
+    padding: 16px 16px;
+    text-decoration: none;
+}
+
+.boton-tablero:hover {
+    background-color: #111;
+}
+
+.logout {
+    float: right;
+    background-color: #e01d1d;
+}
+
+.lista-etiquetas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.elemento-etiqueta {
+    float: left;
+    padding: 5%;
+}

@@ -1,0 +1,27 @@
+.tarea-contenedor {
+    display: flex;
+    flex-direction: column;
+    margin: 3% auto;
+    padding: 3%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-width: 320px;
+    background-color: rgb(255, 245, 159);
+}
+
+.tarea-titulo {
+    text-align: center;
+}
+
+.tarea-fecha {
+    width: 75%;
+    margin: 3% auto;
+    padding: 2% 10% 2% 10%;
+    background-color: rgb(42, 214, 157);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.vencida {
+    background-color: rgb(247, 78, 78);
+}

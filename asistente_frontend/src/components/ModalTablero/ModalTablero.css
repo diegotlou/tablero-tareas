@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+.modal-tablero-contenedor {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 320px;
+}
+
+.modal-tablero-contenedor * {
+    font-family: "Montserrat", sans-serif;
+}
+
+.modal-tablero-contenedor.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.modal-tablero-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-tablero-backdrop.show {
+    opacity: 0.5;
+}
+
+.modal-header .btn-close {
+    /* border: 1px solid;
+    margin: 10px 0px;
+    padding: 10px 10px 10px 10px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #f05f5f;
+    border-radius: 10px;
+    background-color: #f05f5f; */
+    transition: transform 0.2s ease;
+}
+
+.modal-header .btn-close:hover {
+    transform: scale(1.2);
+}
