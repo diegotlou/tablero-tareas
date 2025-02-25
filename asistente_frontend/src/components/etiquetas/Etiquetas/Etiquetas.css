@@ -1,0 +1,10 @@
+.lista-etiquetas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.elemento-etiqueta {
+    float: left;
+    padding: 5%;
+}

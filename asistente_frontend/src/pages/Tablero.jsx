@@ -4,8 +4,8 @@ import {
     FormEtiqueta,
     FormTarea,
     ModalTablero,
-    Tarea,
-    Etiqueta,
+    TareaTablero,
+    Etiquetas,
 } from "../components";
 import { useGet } from "../hooks";
 
@@ -42,6 +42,13 @@ function Tablero() {
         setTipoForm(nombreForm);
         if (nombreForm === "Agregar tarea" || nombreForm === "Agregar etiqueta")
             setAbrirModal(true);
+    };
+
+    const guardarEnTablero = (tareaEditada) => {
+        const tareasActualizadas = tareas.map((tarea) =>
+            tarea.id === tareaEditada.id ? tareaEditada : tarea
+        );
+        setTareas(tareasActualizadas);
     };
 
     return (
@@ -102,31 +109,15 @@ function Tablero() {
                         className="tarea-contenedor"
                         id={"tarea-contenedor-" + tarea.id}
                     >
-                        <Tarea tarea={tarea} />
-                        <ul className="lista-etiquetas">
-                            {tarea.etiquetas.length > 0 &&
-                                tarea.etiquetas.map(
-                                    (etiquetaId) =>
-                                        etiquetas[etiquetaId] && (
-                                            <li
-                                                className="elemento-etiqueta"
-                                                id={
-                                                    "elem-" +
-                                                    tarea.id +
-                                                    "-" +
-                                                    etiquetaId
-                                                }
-                                            >
-                                                <Etiqueta
-                                                    tareaId={tarea.id}
-                                                    etiqueta={
-                                                        etiquetas[etiquetaId]
-                                                    }
-                                                />
-                                            </li>
-                                        )
-                                )}
-                        </ul>
+                        <TareaTablero
+                            tarea={tarea}
+                            guardarEnTablero={guardarEnTablero}
+                        />
+                        <Etiquetas
+                            etiquetas={etiquetas}
+                            etiquetasId={tarea.etiquetas}
+                            tareaId={tarea.id}
+                        />
                     </div>
                 ))}
             </div>
