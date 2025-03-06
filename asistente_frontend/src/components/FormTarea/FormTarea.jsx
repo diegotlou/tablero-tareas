@@ -1,21 +1,21 @@
 import { useState } from "react";
 import api from "../../api";
 
-function FormTarea({ tareas, setTareas, etiquetas }) {
+function FormTarea({ tareas, setTareas, etiquetasUsuario }) {
     const [titulo, setTitulo] = useState("");
     const [contenido, setContenido] = useState("");
     const [fecha_vencimiento, setFecha] = useState("");
     const [progreso, setProgreso] = useState("n");
-    const [etiquetasTarea, setEtiquetasTarea] = useState([]);
+    const [etiquetas, setEtiquetasTarea] = useState([]);
 
     const crearTarea = (e) => {
         e.preventDefault();
-        api.post("/organizador/", {
+        api.post("/organizador/tareas/", {
             titulo,
             contenido,
             fecha_vencimiento,
             progreso,
-            etiquetasTarea,
+            etiquetas,
         })
             .then((res) => {
                 if (res.status === 201) alert("Tarea creada correctamente :D");
@@ -91,7 +91,7 @@ function FormTarea({ tareas, setTareas, etiquetas }) {
                     )
                 }
             >
-                {Object.entries(etiquetas).map(([id, value]) => (
+                {Object.entries(etiquetasUsuario).map(([id, value]) => (
                     <option key={"etiqueta-" + id} value={id}>
                         {value.nombre}
                     </option>

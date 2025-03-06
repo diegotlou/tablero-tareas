@@ -14,7 +14,7 @@ function Tablero() {
     const [etiquetas, setEtiquetas] = useState({});
     const [tipoForm, setTipoForm] = useState(null);
     const [abrirModal, setAbrirModal] = useState(false);
-    const apiGetTareas = useGet("/organizador/");
+    const apiGetTareas = useGet("/organizador/tareas/");
     const apiGetEtiquetas = useGet("/organizador/etiquetas/");
 
     useEffect(() => {
@@ -92,7 +92,7 @@ function Tablero() {
                     <FormTarea
                         tareas={tareas}
                         setTareas={setTareas}
-                        etiquetas={etiquetas}
+                        etiquetasUsuario={etiquetas}
                     />
                 )}
                 {abrirModal && tipoForm === "Agregar etiqueta" && (

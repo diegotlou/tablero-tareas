@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, viewsets
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
@@ -34,6 +35,39 @@ class BorrarTarea(generics.DestroyAPIView):
 
     def get_queryset(self):
         return Tarea.objects.filter(autor=self.request.user)
+    
+class TareaViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = TareaSerializer
+
+    def get_queryset(self):
+        return Tarea.objects.filter(autor=self.request.user)
+    
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            etiquetas_data = self.request.data.get("etiquetas", [])
+            etiquetas_validas = Etiqueta.objects.filter(autor=self.request.user, id__in=etiquetas_data)
+
+            if len(etiquetas_data) != etiquetas_validas.count():
+                raise ValidationError("Hubo un error con las etiquetas seleccionadas.")
+            
+            tarea = serializer.save(autor=self.request.user)
+            tarea.etiquetas.set(etiquetas_validas)
+        else:
+            print(serializer.errors)
+
+    def update(self, request, *args, **kwargs):
+        tarea = self.get_object()
+        if tarea.autor != request.user:
+            return Response({"error" : "No tienes permiso para actualizar esta tarea."})
+        return super().update(request, *args, **kwargs)
+    
+    def destroy(self, request, *args, **kwargs):
+        tarea = self.get_object()
+        if tarea.autor != request.user:
+            return Response({"error" : "No tienes permiso de eliminar esta tarea"})
+        return super().destroy(request, *args, **kwargs)
+
     
 class ListaEtiquetaView(generics.ListCreateAPIView):
     serializer_class = EtiquetaSerializer

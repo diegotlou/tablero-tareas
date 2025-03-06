@@ -1,4 +1,5 @@
 import { useState } from "react";
+import api from "../../../api";
 
 function EditarTarea({ tarea, guardar, cancelar }) {
     const [titulo, setTitulo] = useState(tarea.titulo);
@@ -8,14 +9,25 @@ function EditarTarea({ tarea, guardar, cancelar }) {
     );
     const [progreso, setProgreso] = useState(tarea.progreso);
 
-    const guardarEdicion = () => {
-        guardar({
+    const guardarEdicion = (e) => {
+        e.preventDefault();
+        const tareaEditada = {
             ...tarea,
             titulo: titulo,
             contenido: contenido,
             fecha_vencimiento: fechaVencimiento,
             progreso: progreso,
-        });
+        };
+        api.patch(`/organizador/tareas/${tarea.id}/`, tareaEditada)
+            .then((res) => {
+                if (res.status === 200) {
+                    alert("Tarea editada correctamente :D");
+                    guardar(tareaEditada);
+                } else {
+                    alert("Hubo un problema intentelo de nuevo D:");
+                }
+            })
+            .catch((err) => alert(err));
     };
 
     return (
