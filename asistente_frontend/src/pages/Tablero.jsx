@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/Tablero.css";
 import {
     FormEtiqueta,
@@ -16,6 +17,7 @@ function Tablero() {
     const [abrirModal, setAbrirModal] = useState(false);
     const apiGetTareas = useGet("/organizador/tareas/");
     const apiGetEtiquetas = useGet("/organizador/etiquetas/");
+    const navegacion = useNavigate();
 
     useEffect(() => {
         if (apiGetTareas.data) setTareas(apiGetTareas.data);
@@ -28,20 +30,18 @@ function Tablero() {
             );
     }, [apiGetTareas.data, apiGetEtiquetas.data]);
 
-    // const borrarTarea = (id) => {
-    //     api.delete(`/organizador/borrar/${id}`)
-    //         .then((res) => {
-    //             if (res.status === 204) alert("Tarea borrada con exito :D");
-    //             else alert("Hubo un problema al intentar borrar la tarea D:");
-    //         })
-    //         .catch((error) => alert(error));
-    //     getTareas();
-    // };
-
     const mostrarForm = (nombreForm) => {
         setTipoForm(nombreForm);
         if (nombreForm === "Agregar tarea" || nombreForm === "Agregar etiqueta")
             setAbrirModal(true);
+    };
+
+    const borrarEnTablero = (tareaId) => {
+        tareas.pop(tareaId);
+        const tareasActualizadas = tareas.filter(
+            (tarea) => tarea.id !== tareaId
+        );
+        setTareas(tareasActualizadas);
     };
 
     const guardarEnTablero = (tareaEditada) => {
@@ -77,7 +77,7 @@ function Tablero() {
                     <button
                         className="boton-tablero logout"
                         style={{ float: "right" }}
-                        onClick={() => console.log(":0")}
+                        onClick={() => navegacion("/logout")}
                     >
                         Salir
                     </button>
@@ -112,6 +112,7 @@ function Tablero() {
                         <TareaTablero
                             tarea={tarea}
                             guardarEnTablero={guardarEnTablero}
+                            borrarEnTablero={borrarEnTablero}
                         />
                         <Etiquetas
                             etiquetas={etiquetas}

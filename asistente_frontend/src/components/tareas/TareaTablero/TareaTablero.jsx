@@ -1,9 +1,21 @@
 import { useState } from "react";
 import Tarea from "../Tarea/Tarea";
 import EditarTarea from "../EditorTarea/EditorTarea";
-
-function TareaTablero({ tarea, guardarEnTablero }) {
+import api from "../../../api";
+import "../TareaTablero/TareaTablero.css";
+function TareaTablero({ tarea, borrarEnTablero, guardarEnTablero }) {
     const [editando, setEditando] = useState(false);
+
+    const borrarTarea = (e) => {
+        e.prevantDeafult;
+        api.delete(`/organizador/tareas/${tarea.id}/`)
+            .then((res) => {
+                if (res.status === 204) alert("Tarea borrada correctamente :D");
+                else alert("Hubo un problema al intentar borrar la tarea");
+            })
+            .catch((error) => alert(error));
+        borrarEnTablero();
+    };
 
     const guardarEdicion = (tareaEditada) => {
         guardarEnTablero(tareaEditada);
@@ -23,7 +35,16 @@ function TareaTablero({ tarea, guardarEnTablero }) {
                     cancelar={cancelarEdicion}
                 />
             ) : (
-                <Tarea tarea={tarea} editando={() => setEditando(true)} />
+                <>
+                    <link
+                        rel="stylesheet"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                    ></link>
+                    <button class="boton-eliminar" onClick={borrarTarea}>
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <Tarea tarea={tarea} editando={() => setEditando(true)} />
+                </>
             )}
         </>
     );
