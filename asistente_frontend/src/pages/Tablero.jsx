@@ -6,7 +6,7 @@ import {
     FormTarea,
     ModalTablero,
     TareaTablero,
-    Etiquetas,
+    EtiquetasTarea,
 } from "../components";
 import { useGet } from "../hooks";
 
@@ -37,10 +37,10 @@ function Tablero() {
     };
 
     const borrarEnTablero = (tareaId) => {
-        tareas.pop(tareaId);
         const tareasActualizadas = tareas.filter(
             (tarea) => tarea.id !== tareaId
         );
+        console.log(tareasActualizadas);
         setTareas(tareasActualizadas);
     };
 
@@ -114,10 +114,11 @@ function Tablero() {
                             guardarEnTablero={guardarEnTablero}
                             borrarEnTablero={borrarEnTablero}
                         />
-                        <Etiquetas
+                        <EtiquetasTarea
                             etiquetas={etiquetas}
                             etiquetasId={tarea.etiquetas}
-                            tareaId={tarea.id}
+                            tarea={tarea}
+                            guardarEnTablero={guardarEnTablero}
                         />
                     </div>
                 ))}

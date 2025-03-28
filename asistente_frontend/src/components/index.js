@@ -1,5 +1,5 @@
 import Etiqueta from "./etiquetas/Etiqueta/Etiqueta.jsx";
-import Etiquetas from "./etiquetas/Etiquetas/Etiquetas.jsx";
+import EtiquetasTarea from "./etiquetas/EtiquetasTarea/EtiquetasTarea.jsx";
 import FormEtiqueta from "./FormEtiqueta/FormEtiqueta.jsx";
 import FormSesion from "./FormSesion/FormSesion.jsx";
 import FormTarea from "./FormTarea/FormTarea.jsx";
@@ -11,7 +11,7 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 
 export {
     Etiqueta,
-    Etiquetas,
+    EtiquetasTarea,
     FormEtiqueta,
     FormSesion,
     FormTarea,
