@@ -2,6 +2,8 @@
 
 ## Bibliotecas
 
+npm 22.14.0
+
 -   django
 -   pymysql
 -   mysqlclient
@@ -10,5 +12,3 @@
 -   djangorestframework-simplejwt
 -   react-bootstrap
 -   bootstrap
-
-> Los comentarios siempre son bienvenidos :D
