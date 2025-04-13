@@ -2,7 +2,7 @@
 
 ## Bibliotecas
 
-npm 22.14.0
+node version 22.14.0
 
 -   django
 -   pymysql
